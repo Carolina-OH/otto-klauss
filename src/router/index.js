@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import firebase from 'firebase'
+import Juguetes from '../views/Juguetes.vue'
+import Juguete from '../components/Juguete.vue'
 
 Vue.use(VueRouter)
 
@@ -38,6 +40,22 @@ const routes = [
   {
     path:'/',
     redirect:'/login'
+  },
+  {
+    path: '/juguetes',
+    name:'Juguetes',
+    component:Juguetes,
+    meta:{
+      autenticado:true,
+    }
+  },
+  {
+    path:'/juguetes/:id',
+    name:'juguete',
+    component:Juguete,
+    meta:{
+      autenticado:true,
+    }
   }
 
 ]
