@@ -4,7 +4,7 @@
    <div class="container">
    <h2>Login</h2>
    <label>Usuario</label>
-   <input type="text" placeholder="usuario" v-model="user"><br>
+   <input type="text" placeholder="user@ottoklaus.cl" v-model="user"><br>
    <label>Contraseña</label>
    <input type="password" v-model="password"><br>
    <button @click.prevent='login'>Ingresar</button>
