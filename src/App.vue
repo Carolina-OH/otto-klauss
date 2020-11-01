@@ -1,7 +1,9 @@
 
 <template>
   <div id="app">
+  <navbar></navbar>
     <div id="nav">
+    
       <!---- <router-link to="/">Home</router-link> |
        <router-link to="/about">About</router-link>!-->
     </div>
@@ -9,12 +11,31 @@
   </div>
 </template>
 
+<script>
+import navbar from './components/navbar.vue'
+export default {
+  name: 'component-name',
+  // props: {},
+  data: function(){
+    return {}
+  },
+  // computed: {},
+  methods: {
+    // -- Metodos
+  },
+   components: {
+     'navbar':navbar
+   },
+}
+</script>
+
 <style lang="scss">
 body{
 
     background-image: url('./assets/descarga.png');
     background-size:100%;
     background-repeat:no-repeat;
+    background-position: 20% 75%;
     width:100%;
 
 }

@@ -50,7 +50,7 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap');
 .container{
-    margin-left:20%;
+    margin-left:0%;
     margin-right:20%;
     margin-top:15%;
     display: grid;
@@ -72,7 +72,7 @@ background-position:bottom;
 width:500px;
 margin-left:auto;
 margin-right:auto;
-margin-top:100px;
+margin-top:50px;
 border:3px solid black;
 border-radius:270px;
 }
