@@ -1,11 +1,12 @@
 <template>
 <div>
+
     <h1> Juguete</h1>
     <br>
     <div>
              <form>
              <label>Editar</label>
-             <input type="checkbox" v-model="edit"> <br>
+             <input type="checkbox" v-model="edit" > <br>
                 <label for="">Código</label>
                 <input type="text" v-model="form.Codigo" :disabled="!edit" ><br><br>
                 <label for="">Nombre</label>
@@ -20,6 +21,9 @@
              </form>
 
     </div>
+    <br>
+    <br>
+            <router-link to="/juguetes" class="link"><-- VOLVER</router-link>
          </div>
 </template>
 
@@ -63,16 +67,20 @@ export default {
          editJuguete(){
             let juguete = this.form
             juguete.id = this.id
-            this.loading=true
+            let res = confirm('¿Está seguro que desea editar los registros?')
+            if(!res){
+                this.$router.push('/juguetes')
+            }
+            else{
+              
             let response = this.updateJuguete(juguete)
             response.then(()=>{
-                
-                console.log('Juguete actualizado')
-                this.loading=false
+            console.log('Juguete actualizado')
                 this.$router.push("/Juguetes")
             }).catch(error=>{
                 console.log(error)
         })
+        }
         },
             destroyJuguete(){
             let res = confirm ("¿Estás seguro que deseas eliminar el juguete?")
@@ -101,5 +109,9 @@ export default {
     }
     h1{
           font-size:70px
+    }
+    .link{
+        font-size:40px;
+        color:black
     }
 </style>
