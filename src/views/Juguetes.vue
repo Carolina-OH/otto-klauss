@@ -1,7 +1,7 @@
 <template>
     <div id="app">
     <div>
-    <button>Salir</button><br><br><br><br>
+    <button @click.prevent="logout">Salir</button><br><br><br><br>
     </div>
     <div class="añadir">
      <h2 @click.prevent="cambiarvisible">Para añadir Juguete clickeame!</h2><br>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 import {mapActions,mapState, mapGetters} from 'vuex'
 export default {
     name: 'galeria-juguetes',
@@ -119,6 +120,15 @@ export default {
             cambiarvisible(){
                 this.visible=!this.visible
             }, 
+            logout(){
+                firebase.auth().signOut()
+                    .then(()=>{
+                        this.$router.push('/login')
+                    // Sign-out successful.
+                    }).catch(function(error) {
+                    // An error happened.
+                    });
+            }
  
     },
     
