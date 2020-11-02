@@ -4,14 +4,19 @@
     <br>
     <div>
              <form>
+             <label>Editar</label>
+             <input type="checkbox" v-model="edit"> <br>
                 <label for="">Código</label>
-                <input type="text" v-model="form.Codigo"><br><br>
+                <input type="text" v-model="form.Codigo" :disabled="!edit" ><br><br>
                 <label for="">Nombre</label>
-                <input type="text" v-model="form.Nombre"><br><br>
+                <input type="text" v-model="form.Nombre" :disabled="!edit"><br><br>
                 <label for="">Precio</label>
-                <input type="text" v-model.number="form.Precio"><br><br>
+                <input type="text" v-model.number="form.Precio" :disabled="!edit"><br><br>
                 <label for="">Stock</label>
-                <input type="text" v-model.number="form.Stock"><br><br>
+                <input type="text" v-model.number="form.Stock" :disabled="!edit"><br><br>
+
+                <button @click.prevent="editJuguete" :disabled="!edit">Editar</button>
+                <button @click.prevent="destroyJuguete" :disabled="!edit">Eliminar</button>
              </form>
 
     </div>
@@ -19,7 +24,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters,mapActions} from 'vuex'
 export default {
     name: 'juguete-component',
     props: ['id'],
@@ -31,15 +36,61 @@ export default {
                 Stock:"",
                 Precio:"",
             }
+            ,
+            edit:false
         }
     },
     computed: {
-        ...mapGetters(['getJuguete'])
+        ...mapGetters(['getJuguete']),
+       
     },
     methods: {
-        // -- Metodos
+            async setJuguete() {
+            let juguete = this.getJuguete(this.id)
+            //  console.log(user)
+            
+            
+            if (juguete === undefined) {
+                let resp = await this.fetchIdJuguete(this.id)
+                juguete = resp.data()
+            }
+            
+            this.form.Codigo = juguete.Codigo
+            this.form.Nombre = juguete.Nombre
+            this.form.Precio = juguete.Precio
+            this.form.Stock = juguete.Stock
+        },
+         editJuguete(){
+            let juguete = this.form
+            juguete.id = this.id
+            this.loading=true
+            let response = this.updateJuguete(juguete)
+            response.then(()=>{
+                
+                console.log('Juguete actualizado')
+                this.loading=false
+                this.$router.push("/Juguetes")
+            }).catch(error=>{
+                console.log(error)
+        })
+        },
+            destroyJuguete(){
+            let res = confirm ("¿Estás seguro que deseas eliminar el juguete?")
+            if (!res) return 
+
+            this.deleteJuguete(this.id).then(()=>{
+                alert("Juguete Eliminado");
+                this.$router.push('/juguetes')
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+         ...mapActions(['fetchIdJuguete','updateJuguete','deleteJuguete'])
     },
     // components: {},
+    created(){
+        this.setJuguete()
+    }
 }
 </script>
 

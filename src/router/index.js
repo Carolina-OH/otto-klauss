@@ -53,6 +53,7 @@ const routes = [
     path:'/juguetes/:id',
     name:'juguete',
     component:Juguete,
+    props:true,
     meta:{
       autenticado:true,
     }

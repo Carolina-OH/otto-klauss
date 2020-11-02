@@ -42,6 +42,9 @@ export default new Vuex.Store({
     updateJuguete({},juguete){
       return db.collection('Juguetes').doc(juguete.id).update(juguete)
     },
+    deleteJuguete({},id_juguete){
+      return db.collection('Juguetes').doc(id_juguete).delete()
+    }
   },
   getters:{
     getJuguete:(state)=>(id_juguete)=>{
