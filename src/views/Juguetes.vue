@@ -1,5 +1,8 @@
 <template>
     <div id="app">
+    <div>
+    <button>Salir</button><br><br><br><br>
+    </div>
     <div class="añadir">
      <h2 @click.prevent="cambiarvisible">Para añadir Juguete clickeame!</h2><br>
      <div class="formulario" v-if="visible">
@@ -51,6 +54,7 @@
         
     </div>
     </div>
+    
 </template>
 
 <script>
@@ -100,12 +104,17 @@ export default {
         // -- Metodos
         ...mapActions(['fetchJuguetes', 'addJuguete']),
         createJuguete(){
+            if (this.juguete.Codigo==="" || this.juguete.Nombre===""|| this.juguete.Stock===""||this.juguete.Precio===""){
+                alert('debe rellenar todos los campos')
+            }
+           else{
             this.addJuguete(this.juguete).then(()=>{
                 alert('Juguete registrado exitosamente')
             this.$router.push('/juguetes')
             }).catch(error=>{
-                console.log(error)
+               console.log(error) 
             })
+            }
         },
             cambiarvisible(){
                 this.visible=!this.visible
@@ -149,8 +158,9 @@ export default {
     }
     #app{
         display:flex;
-        flex-direction:row;
+        flex-direction:column;
         justify-content:space-between
+
     }
     table{
         background-color:lightblue;

@@ -7,7 +7,6 @@
     </b-navbar-brand>
   </b-navbar>
 
-
   </b-navbar>
 </div>
 

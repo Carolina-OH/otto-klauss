@@ -34,7 +34,7 @@ export default {
             console.log(firebase.default.auth)
             firebase.auth().signInWithEmailAndPassword(this.user, this.password)
             .then(()=>{
-                this.$router.push('/home')
+                this.$router.push('/juguetes')
             })
             .catch(function (error) {
                 let errorCode = error.code;

@@ -1,6 +1,6 @@
 <template>
 <div>
-
+<button>Salir</button>
     <h1> Juguete</h1>
     <br>
     <div>
